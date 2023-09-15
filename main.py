@@ -24,7 +24,7 @@ def evolve_virus(population_size, initial_state, target_state, mutation_rate, nu
 
     for generation in range(num_generations):
         for i in range(population_size):
-            # Mutate the virus
+            # Mutate the organism
             population[i] = [np.random.choice(['A', 'T', 'G', 'C']) if np.random.rand() < mutation_rate else curr for curr in population[i]]
             
             # Count the number of correct evolved base pairs
@@ -32,10 +32,10 @@ def evolve_virus(population_size, initial_state, target_state, mutation_rate, nu
             evolved_base_pairs[i][generation] = evolved_count / len(target_state)
 
             # If all base pairs are correct, the virus can infect the cell
-            if np.max(evolved_base_pairs[i][generation]) == 1:
-                print(np.max(evolved_base_pairs[i][generation]))
-                print(f'Virus has infected the cell at generation {generation}')
-                break
+            # if np.max(evolved_base_pairs[i][generation]) == 1:
+            #     print(np.max(evolved_base_pairs[i][generation]))
+            #     print(f'Virus has infected the cell at generation {generation}')
+            #     break
 
             # Count the number of correct evolved base pairs
             evolved_count = sum(curr == target for curr, target in zip(population[i], target_state))
@@ -55,15 +55,10 @@ num_generations = 10000
 
 evolved_base_pairs = evolve_virus(population_size, initial_state, target_state, mutation_rate, num_generations)
 
-# print("Real Time: " num_generations * hours_per_generation)
-plt.figure()                            # Create a new figure
-plt.imshow(evolved_base_pairs, aspect='auto', interpolation='none', origin='lower', extent=[0, num_generations, 0, population_size])        # Plot the evolved base pairs over time
-plt.colorbar(label="Number of Evolved Base Pairs") # Add a colorbar
-# plt.plot(evolved_base_pairs)            # Plot the evolved base pairs over time
-plt.xlabel('Generation')                # Label the x-axis Generation
-plt.ylabel('Individual Viruses')        # Label the y-axis Evolved Base Pairs
-plt.title("Evolution of Virus Genome")  # Title the plot
+plt.figure()
+plt.imshow(evolved_base_pairs, aspect='auto', interpolation='none', origin='lower', extent=[0, num_generations, 0, population_size])
+plt.xlabel('Generation')
+plt.ylabel('Individual Viruses')
+plt.title("Evolution of Virus Genome")
 plt.show()
-
-
 
