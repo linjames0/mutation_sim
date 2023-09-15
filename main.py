@@ -62,8 +62,7 @@ plt.suptitle("Stochastic Genome Evolution")
 cax = axs[0].imshow(correct_base_pairs, cmap='inferno', aspect='auto', interpolation='none', origin='lower', extent=[0, num_generations, 0, population_size])        # Plot the evolved base pairs over time
 axs[0].set_xlabel('Generation')
 axs[0].set_ylabel('Individual Cells')
-colorbar = fig.colorbar(cax, ax=axs[0])
-
+fig.colorbar(cax, ax=axs[0], label='Percent Evolved Base Pairs')
 axs[0].yaxis.set_major_locator(MaxNLocator(integer=True))
 
 # Plot the line graph of 5 random individuals over time, including the best individual
